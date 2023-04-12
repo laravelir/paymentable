@@ -1,7 +1,7 @@
 {
-    "name": "miladimos/package-skeleton",
-    "description": "test description",
-    "homepage": "https://github.com/miladimos/package-skeleton",
+    "name": "laravelir/paymentable",
+    "description": "payment service",
+    "homepage": "https://github.com/laravelir/paymentable",
     "type": "library",
     "version": "0.1.0",
     "keywords": [
@@ -22,7 +22,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Vendor\\Package\\": "src/"
+            "Laravelir\\Paymentable\\": "src/"
         },
         "files": [
             "./src/helpers.php"
@@ -30,16 +30,16 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Vendor\\Package\\Tests\\": "tests"
+            "Laravelir\\Paymentable\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Package\\Package\\Providers\\PackageServiceProvider"
+                "Paymentable\\Paymentable\\Providers\\PaymentableServiceProvider"
             ],
             "aliases": {
-                "Package": "Vendor\\Package\\Facades\\Package"
+                "Paymentable": "Laravelir\\Paymentable\\Facades\\Paymentable"
             }
         }
     },

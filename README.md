@@ -1,30 +1,30 @@
-- [![Starts](https://img.shields.io/github/stars/miladimos/package-skeleton?style=flat&logo=github)](https://github.com/miladimos/package-skeleton/forks)
-- [![Forks](https://img.shields.io/github/forks/miladimos/package-skeleton?style=flat&logo=github)](https://github.com/miladimos/package-skeleton/stargazers)
-  [![Total Downloads](https://img.shields.io/packagist/dt/miladimos/package-skeleton.svg?style=flat-square)](https://packagist.org/packages/miladimos/package-skeleton)
+- [![Starts](https://img.shields.io/github/stars/laravelir/paymentable?style=flat&logo=github)](https://github.com/laravelir/paymentable/forks)
+- [![Forks](https://img.shields.io/github/forks/laravelir/paymentable?style=flat&logo=github)](https://github.com/laravelir/paymentable/stargazers)
+  [![Total Downloads](https://img.shields.io/packagist/dt/laravelir/paymentable.svg?style=flat-square)](https://packagist.org/packages/laravelir/paymentable)
 
 
-# vendor/package
+# laravelir/paymentable
 
-A package for fun
+A paymentable for fun
 
 ### Installation
 
-1. Run the command below to add this package:
+1. Run the command below to add this paymentable:
 
 ```
-composer require vendor/package
+composer require laravelir/paymentable
 ```
 
 2. Open your config/app.php and add the following to the providers array:
 
 ```php
-Vendor\Package\Providers\CacheableServiceProvider::class,
+Laravelir\Paymentable\Providers\PaymentableServiceProvider::class,
 ```
 
 1. Run the command below to install the package:
 
 ```
-php artisan package:install
+php artisan paymentable:install
 ```
 
 

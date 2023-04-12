@@ -1,6 +1,6 @@
 <?php
 
-namespace Vendor\Package\Providers;
+namespace Laravelir\Paymentable\Providers;
 
 use App\Http\Kernel;
 use Illuminate\Routing\Router;
@@ -8,15 +8,15 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Vendor\Package\Console\Commands\InstallPackageCommand;
-use Vendor\Package\Facades\Package;
+use Laravelir\Paymentable\Console\Commands\InstallPackageCommand;
+use Laravelir\Paymentable\Facades\Paymentable;
 
-class PackageServiceProvider extends ServiceProvider
+class PaymentableServiceProvider extends ServiceProvider
 {
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . "/../../config/package.php", 'package');
+        $this->mergeConfigFrom(__DIR__ . "/../../config/paymentable.php", 'paymentable');
 
         // $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
@@ -44,17 +44,17 @@ class PackageServiceProvider extends ServiceProvider
 
     private function registerFacades()
     {
-        $this->app->bind('package', function ($app) {
-            return new Package();
+        $this->app->bind('paymentable', function ($app) {
+            return new Paymentable();
         });
     }
 
     // private function registerViews()
     // {
-    //     $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'package');
+    //     $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'paymentable');
 
     //     $this->publishes([
-    //         __DIR__ . '/../../resources/views' => resource_path('views/laravelir/package'),
+    //         __DIR__ . '/../../resources/views' => resource_path('views/laravelir/paymentable'),
     //     ]);
     // }
 
@@ -64,7 +64,7 @@ class PackageServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
 
             $this->commands([
-                InstallPackageCommand::class,
+                InstallPaymentableCommand::class,
             ]);
         }
     }
@@ -72,46 +72,46 @@ class PackageServiceProvider extends ServiceProvider
     public function publishConfig()
     {
         $this->publishes([
-            __DIR__ . '/../../config/package.php' => config_path('package.php')
-        ], 'package-config');
+            __DIR__ . '/../../config/paymentable.php' => config_path('paymentable.php')
+        ], 'paymentable-config');
     }
 
     // private function registerAssets()
     // {
     //     $this->publishes([
-    //         __DIR__ . '/../../resources/statics' => public_path('package'),
-    //     ], 'package-assets');
+    //         __DIR__ . '/../../resources/statics' => public_path('paymentable'),
+    //     ], 'paymentable-assets');
     // }
 
     // private function publishStubs()
     // {
     //     $this->publishes([
-    //         __DIR__ . '/../Console/Stubs' => resource_path('vendor/laravelir/package/stubs'),
-    //     ], 'package-stubs');
+    //         __DIR__ . '/../Console/Stubs' => resource_path('vendor/laravelir/paymentable/stubs'),
+    //     ], 'paymentable-stubs');
     // }
 
     // public function registerTranslations()
     // {
-    //     $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'package');
+    //     $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'paymentable');
 
     //     $this->publishes([
-    //         __DIR__ . '/../../resources/lang' => resource_path('lang/laravelir/package'),
-    //     ], 'package-langs');
+    //         __DIR__ . '/../../resources/lang' => resource_path('lang/laravelir/paymentable'),
+    //     ], 'paymentable-langs');
     // }
 
     // private function registerRoutes()
     // {
     //     Route::group($this->routeConfiguration(), function () {
-    //         $this->loadRoutesFrom(__DIR__ . '/../../routes/package.php', 'package-routes');
+    //         $this->loadRoutesFrom(__DIR__ . '/../../routes/paymentable.php', 'paymentable-routes');
     //     });
     // }
 
     // private function routeConfiguration()
     // {
     //     return [
-    //         'prefix' => config('package.routes.prefix'),
-    //         'middleware' => config('package.routes.middleware'),
-    //         'as' => 'package.'
+    //         'prefix' => config('paymentable.routes.prefix'),
+    //         'middleware' => config('paymentable.routes.middleware'),
+    //         'as' => 'paymentable.'
     //     ];
     // }
 
@@ -119,8 +119,8 @@ class PackageServiceProvider extends ServiceProvider
     // {
     // $timestamp = date('Y_m_d_His', time());
     //     $this->publishes([
-    //         __DIR__ . '/../database/migrations/package_tables.stub' => database_path() . "/migrations/{$timestamp}package_tables.php",
-    //     ], 'package-migrations');
+    //         __DIR__ . '/../database/migrations/paymentable_tables.stub' => database_path() . "/migrations/{$timestamp}paymentable_tables.php",
+    //     ], 'paymentable-migrations');
     // }
 
     // protected function registerBladeDirectives()
@@ -130,7 +130,7 @@ class PackageServiceProvider extends ServiceProvider
     //     });
 
     //     Blade::directive('config', function ($key) {
-    //         return "<?php echo config('package.' . $key); ?/>";
+    //         return "<?php echo config('paymentable.' . $key); ?/>";
     //     });
     // }
 

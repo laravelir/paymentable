@@ -1,6 +1,6 @@
 <?php
 
-// routes of vendor/package
+// routes of laravelir/paymentable
 
 use Illuminate\Support\Facades\Route;
 

@@ -1,17 +1,17 @@
 <?php
 
-namespace Vendor\Package\Models;
+namespace Laravelir\Paymentable\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PackageModel extends Model
+class Paymentable extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'tables';
+    protected $table = 'paymentables';
 
     // protected $fillable = ['name'];
 
