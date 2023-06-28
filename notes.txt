@@ -2,5 +2,3 @@ https://github.com/omalizadeh/laravel-multi-payment
 
 https://github.com/orgs/shetabit/repositories
 
-    https://github.com/evryn/laravel-toman
-
