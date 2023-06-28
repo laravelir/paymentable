@@ -5,8 +5,20 @@ return [
     'driver' => env('PAYMENTABLE_DRIVER', 'zarinpal'),
 
     'drivers' => [
-        'zarinpal' => [],
+
+        'zarinpal' => [
+            'sandbox' => env('', false),
+            'merchant_id' => env(''),
+        ],
+
+        'idpay' => [
+            'sandbox' => env('', false),
+            'api_key' => env(''),
+        ],
+
         'yekpay' => [],
-        'idpay' => [],
     ],
+
+    'description' => '',
+    'callback' => '',
 ];

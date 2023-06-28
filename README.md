@@ -5,7 +5,7 @@
 
 # laravelir/paymentable
 
-A paymentable for fun
+A multi driver ir payment laravel package 
 
 ### Installation
 
@@ -15,18 +15,42 @@ A paymentable for fun
 composer require laravelir/paymentable
 ```
 
-2. Open your config/app.php and add the following to the providers array:
+2. Open your config/app.php and add the following to the providers / aliases array:
 
 ```php
-Laravelir\Paymentable\Providers\PaymentableServiceProvider::class,
+Laravelir\Paymentable\Providers\PaymentableServiceProvider::class, // provider
 ```
 
-1. Run the command below to install the package:
+```php
+'Cart' => Laravelir\Cart\Facade\Cart::class, // alias
+```
+
+3. Run the command below to install the package:
 
 ```
 php artisan paymentable:install
 ```
 
+### Drivers
+
+
+### Usage
+
+```php
+
+$user = auth()->user;
+$amount = 5000; // toman
+$paymentResult = Paymentable::payment($user, $toman);
+
+if($paymentResult->is_success()) {
+    $transactionId = $paymentResult->transactionId();
+
+    return $paymentResult->redirectToGateway();
+}
+
+// callback
+
+```
 
 ## Testing
 

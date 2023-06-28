@@ -15,9 +15,8 @@ class CreatePaymentablesTable extends Migration
     {
         Schema::create('paymentables', function (Blueprint $table) {
             $table->id();
-
-            $table->string('title');
-
+            $table->morphs('paymentorable'); // user
+            $table->timestamp('payment_success_at');
             $table->timestamps();
         });
     }

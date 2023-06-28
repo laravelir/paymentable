@@ -2,11 +2,6 @@
 
 namespace Laravelir\Paymentable\Drivers;
 
-class Yekpay
-{
-
-}
-
 use SoapClient;
 
 final class YekpayPaymentService
@@ -47,8 +42,6 @@ final class YekpayPaymentService
             } else {
                 echo ('YekPay Error : ' . $result->Description);
             }
-
-
         } catch (\Throwable $th) {
             //throw $th;
         }
