@@ -2,6 +2,6 @@
 
 namespace Laravelir\Paymentable\Exceptions;
 
-class DriverException extends Exception
+class DriverNotFoundException extends Exception
 {
 }
