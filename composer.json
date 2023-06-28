@@ -28,11 +28,6 @@
             "./src/helpers.php"
         ]
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Laravelir\\Paymentable\\Tests\\": "tests"
-        }
-    },
     "extra": {
         "laravel": {
             "providers": [

@@ -11,6 +11,6 @@ if (!function_exists('tomanToRial')) {
 if (!function_exists('rialToToman')) {
     function rialToToman($amount)
     {
-        return true;
+        return $amount / 10;
     }
 }
