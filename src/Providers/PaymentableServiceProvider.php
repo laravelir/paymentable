@@ -13,8 +13,6 @@ class PaymentableServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . "/../../config/paymentable.php", 'paymentable');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
-
         $this->registerFacades();
     }
 
@@ -25,11 +23,7 @@ class PaymentableServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         $this->registerCommands();
-        $this->publishMigrations();
-        // $this->registerRoutes();
-        // $this->publishStubs();
     }
 
     private function registerFacades()
@@ -55,43 +49,4 @@ class PaymentableServiceProvider extends ServiceProvider
             __DIR__ . '/../../config/paymentable.php' => config_path('paymentable.php')
         ], 'paymentable-config');
     }
-
-    protected function publishMigrations()
-    {
-    $timestamp = date('Y_m_d_His', time());
-        $this->publishes([
-            __DIR__ . '/../database/migrations/create_paymentables_tables.php.stub' => database_path() . "/migrations/{$timestamp}_create_paymentables_table.php",
-        ], 'paymentable-migrations');
-    }
-
-    // private function registerRoutes()
-    // {
-    //     Route::group($this->routeConfiguration(), function () {
-    //         $this->loadRoutesFrom(__DIR__ . '/../../routes/paymentable.php', 'paymentable-routes');
-    //     });
-    // }
-
-    // private function routeConfiguration()
-    // {
-    //     return [
-    //         'prefix' => config('paymentable.routes.prefix'),
-    //         'middleware' => config('paymentable.routes.middleware'),
-    //         'as' => 'paymentable.'
-    //     ];
-    // }
-
-
-    // protected function registerMiddleware(Kernel $kernel, Router $router)
-    // {
-    //     // global
-    //     $kernel->pushMiddleware(CapitalizeTitle::class);
-
-    //     // route middleware
-    //     // $router = $this->app->make(Router::class);
-    //     $router->aliasMiddleware('capitalize', CapitalizeTitle::class);
-
-    //     // group
-    //     $router->pushMiddlewareToGroup('web', CapitalizeTitle::class);
-    // }
-
 }

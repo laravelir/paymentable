@@ -8,9 +8,11 @@ abstract class Driver implements DriverContract
 {
     public function payment()
     {
+        //
     }
 
-    protected function isSandbox()
+    public function isSandbox(): bool
     {
+        return true;
     }
 }

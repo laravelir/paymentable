@@ -3,114 +3,41 @@
 namespace Laravelir\Paymentable\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class InstallPackageCommand extends Command
 {
     protected $signature = 'paymentable:install';
 
-    protected $description = 'Install the paymentable Paymentable';
+    protected $description = 'Install the paymentable';
 
     public function handle()
     {
-        $this->line("\t... Welcome To Paymentable Installer ...");
+        $this->line("\t... Welcome To laravelir/paymentable Installer ...");
 
-
-        // if (!empty(File::glob(database_path('migrations\*_create_paymentables_tables.php')))) {
-
-        //     $list  = File::glob(database_path('migrations\*_create_paymentables_tables.php'));
-        //     collect($list)->each(function ($item) {
-        //         File::delete($item);
-        //     });
-
-        //     $this->publishMigration();
-        // } else {
-        //     $this->publishMigration();
-        // }
-
-        // if (!empty(File::glob(database_path('migrations\*_create_paymentable_table.php')))) {
-        //     $list  = File::glob(database_path('migrations\*_create_paymentable_table.php'));
-        //     collect($list)->each(function ($item) {
-        //         File::delete($item);
-        //         $this->warn("Deleted: " . $item);
-        //     });
-        //     $this->publishMigration();
-        // } else {
-        //     $this->publishMigration();
-        // }
-
+        //config
+        if (File::exists(config_path('paymentable.php'))) {
+            $confirm = $this->confirm("paymentable.php already exist. Do you want to overwrite?");
+            if ($confirm) {
+                $this->publishConfig();
+                $this->info("config overwrite finished");
+            } else {
+                $this->info("skipped config publish");
+            }
+        } else {
+            $this->publishConfig();
+            $this->info("config published");
+        }
         $this->info("Paymentable Successfully Installed.\n");
         $this->info("\t\tGood Luck.");
     }
 
-    //       //config
-    //       if (File::exists(config_path('paymentable.php'))) {
-    //         $confirm = $this->confirm("paymentable.php already exist. Do you want to overwrite?");
-    //         if ($confirm) {
-    //             $this->publishConfig();
-    //             $this->info("config overwrite finished");
-    //         } else {
-    //             $this->info("skipped config publish");
-    //         }
-    //     } else {
-    //         $this->publishConfig();
-    //         $this->info("config published");
-    //     }
-
-    //     //assets
-    //     if (File::exists(public_path('paymentable'))) {
-    //         $confirm = $this->confirm("paymentable directory already exist. Do you want to overwrite?");
-    //         if ($confirm) {
-    //             $this->publishAssets();
-    //             $this->info("assets overwrite finished");
-    //         } else {
-    //             $this->info("skipped assets publish");
-    //         }
-    //     } else {
-    //         $this->publishAssets();
-    //         $this->info("assets published");
-    //     }
-
-    //     //migration
-    //     if (File::exists(database_path("migrations/$migrationFile"))) {
-    //         $confirm = $this->confirm("migration file already exist. Do you want to overwrite?");
-    //         if ($confirm) {
-    //             $this->publishMigration();
-    //             $this->info("migration overwrite finished");
-    //         } else {
-    //             $this->info("skipped migration publish");
-    //         }
-    //     } else {
-    //         $this->publishMigration();
-    //         $this->info("migration published");
-    //     }
-
-    //     $this->call('migrate');
-    // }
-
-    // private function publishConfig()
-    // {
-    //     $this->call('vendor:publish', [
-    //         '--provider' => "Laravelir\\Paymentable\\Providers\\PaymentableServiceProvider",
-    //         '--tag'      => 'paymentable-config',
-    //         '--force'    => true
-    //     ]);
-    // }
-
-    // private function publishMigration()
-    // {
-    //     $this->call('vendor:publish', [
-    //         '--provider' => "Laravelir\\Paymentable\\Providers\\PaymentableServiceProvider",
-    //         '--tag'      => 'paymentable-migrations',
-    //         '--force'    => true
-    //     ]);
-    // }
-
-    // private function publishAssets()
-    // {
-    //     $this->call('vendor:publish', [
-    //         '--provider' => "Laravelir\\Paymentable\\Providers\\PaymentableServiceProvider",
-    //         '--tag'      => 'paymentable-assets',
-    //         '--force'    => true
-    //     ]);
-    // }
+    private function publishConfig()
+    {
+        $this->call('vendor:publish', [
+            '--provider' => "Laravelir\\Paymentable\\Providers\\PaymentableServiceProvider",
+            '--tag'      => 'paymentable-config',
+            '--force'    => true
+        ]);
+    }
 }

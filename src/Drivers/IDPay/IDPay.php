@@ -4,56 +4,7 @@ namespace Laravelir\Paymentable\Drivers;
 
 class IDPay
 {
-    params = array(
-        'order_id' => '101',
-        'amount' => 10000,
-        'phone' => '09382198592',
-        'name' => 'نام پرداخت کننده',
-        'desc' => 'توضیحات پرداخت کننده',
-        'callback' => URL_CALLBACK,
-      );
 
-      idpay_payment_create($params);
-
-
-      /**
-       * @param array $params
-       * @return bool
-       */
-      function idpay_payment_create($params) {
-          $header = array(
-          'Content-Type: application/json',
-          'X-API-KEY:' . APIKEY,
-          'X-SANDBOX:' . SANDBOX,
-        );
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, URL_PAYMENT);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        $result = json_decode($result);
-
-        if (empty($result) || empty($result->link)) {
-
-          print 'Exception message:';
-          print '<pre>';
-          print_r($result);
-          print '</pre>';
-
-          return FALSE;
-        }
-
-        //.Redirect to payment form
-        header('Location:' . $result->link);
-      }
-
-
-      //////////////////////
     public function payment()
     {
         $params = array(
@@ -101,8 +52,7 @@ class IDPay
 
         $result = curl_exec($ch);
         curl_close($ch);
-
-        var_dump($result);
+        $result = json_decode($result);
     }
 
     public function get_status_description($status)
@@ -203,46 +153,6 @@ define('SANDBOX', TRUE);
 
         return FALSE;
       }
-
-
-      /**
-       * @param array $response
-       * @return bool
-       */
-      function idpay_payment_verify($response) {
-
-        $header = array(
-          'Content-Type: application/json',
-          'X-API-KEY:' . APIKEY,
-          'X-SANDBOX:' . SANDBOX,
-        );
-
-        $params = array(
-          'id' => $response['id'],
-          'order_id' => $response['order_id'],
-        );
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, URL_VERIFY);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        $result = json_decode($result);
-
-        if (empty($result) ||
-            empty($result->status)) {
-
-          print 'Exception message:';
-          print '<pre>';
-          print_r($result);
-          print '</pre>';
-
-          return FALSE;
-        }
 
         print idpay_payment_get_message($result->status);
 

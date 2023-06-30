@@ -6,6 +6,7 @@ use Laravelir\Paymentable\Exceptions\DriverNotFoundException;
 
 class Paymentable
 {
+    protected string $driver;
     protected float $amount;
     protected string $uuid;
     protected ?int $userId = null;
@@ -20,32 +21,37 @@ class Paymentable
 
     public function __construct()
     {
-        $this->setDriver();
+        $this->setDefaultDriver();
     }
 
-    public function validateDriver()
+    private function validateDriver()
     {
         if (true) {
             throw new DriverNotFoundException();
         }
     }
 
-    private function setDriver(): void
+    private function setDefaultDriver()
     {
         $this->validateDriver();
-
-        $class = config($this->getDriverConfigKey());
-
-        $this->driver = new $class($this->getConfigs());
+        $this->driver = config('paymentable.driver');
     }
 
-    private function getDriver(): PurchaseInterface
+    private function setDriver($driver): void
     {
-        if (empty($this->driver)) {
-            $this->setDefaultGateway();
-        }
+        $this->validateDriver();
+        $this->driver = $driver;
+    }
 
+    public function getDriver()
+    {
         return $this->driver;
+    }
+
+    public function driver($driver)
+    {
+        $this->setDriver($driver);
+        return $this;
     }
 
     public function setTransactionId(string $id): self

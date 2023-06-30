@@ -7,18 +7,21 @@ return [
     'drivers' => [
 
         'zarinpal' => [
-            'sandbox' => env('', false),
-            'merchant_id' => env(''),
+            'sandbox' => env('ZARINPAL_SANDBOX', false),
+            'merchant_id' => env('ZARINPAL_MERCHANT_ID'),
         ],
 
         'idpay' => [
-            'sandbox' => env('', false),
-            'api_key' => env(''),
+            'sandbox' => env('IDPAY_SANDBOX', false),
+            'api_key' => env('IDPAY_API_KEY'),
         ],
 
         'yekpay' => [],
+
+        'zibal' => [],
     ],
 
-    'description' => '',
-    'callback' => '',
+    'default_description' => '',
+
+    'callback_url' => '',
 ];

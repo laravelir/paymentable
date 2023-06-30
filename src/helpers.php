@@ -3,7 +3,7 @@
 if (!function_exists('tomanToRial')) {
     function tomanToRial($amount)
     {
-        return true;
+        return $amount * 10;
     }
 }
 

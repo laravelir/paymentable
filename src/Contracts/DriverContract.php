@@ -12,6 +12,6 @@ interface DriverContract
     public function callback();
     public function paymentUrl(array $options = []): ?string;
     public function pay(array $options = []): Redirect;
-    public function isSandbox();
+    public function isSandbox(): bool;
     public function getEndpoint();
 }
